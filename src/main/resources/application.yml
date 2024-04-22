@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: secure-file-system
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/sec_file_system_db
+    password: 12062003
+    username: postgres
+
+  jpa:
+    show-sql: true
+    database: postgresql
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create-drop
