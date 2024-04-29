@@ -1,14 +1,14 @@
 package ua.vital.securefilesystem.dto.file_dto;
 
 import jakarta.validation.constraints.Positive;
-import ua.vital.securefilesystem.model.File;
+import lombok.Builder;
+import lombok.Data;
 
-import java.util.List;
-
+@Data
+@Builder
 public class FileFilterDTO {
     //Filter properties
     @Positive
     private Integer ownerId;
-    private List<File.Language> languageList;
     private String extension;
 }

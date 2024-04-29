@@ -1,7 +1,6 @@
 package ua.vital.securefilesystem.controller;
 
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Positive;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ua.vital.securefilesystem.dto.user_dto.CreateUserDTO;
@@ -11,7 +10,7 @@ import ua.vital.securefilesystem.service.UserService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/user")
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
@@ -27,13 +26,13 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public User updateNewUser(@PathVariable @Positive Integer id,
+    public User updateNewUser(@PathVariable Integer id,
                               @Valid @RequestBody CreateUserDTO userDTO){
         return userService.updateUser(id, userDTO);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUser(@PathVariable @Positive Integer id){
+    public void deleteUser(@PathVariable Integer id){
         userService.deleteUser(id);
     }
 }

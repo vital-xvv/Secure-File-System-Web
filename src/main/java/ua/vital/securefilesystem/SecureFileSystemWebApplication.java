@@ -4,9 +4,8 @@ import com.github.javafaker.Faker;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 import ua.vital.securefilesystem.model.File;
-import static ua.vital.securefilesystem.model.File.Language;
+import ua.vital.securefilesystem.model.Language;
 
 import ua.vital.securefilesystem.model.User;
 import ua.vital.securefilesystem.repository.FileRepository;
@@ -24,7 +23,7 @@ public class SecureFileSystemWebApplication {
         SpringApplication.run(SecureFileSystemWebApplication.class, args);
     }
 
-    @Bean
+    //@Bean
     public CommandLineRunner commandLineRunner(FileRepository fileRepository, UserRepository userRepository) {
         return args -> {
             IntStream.range(1,11).forEach(i -> {
@@ -35,7 +34,7 @@ public class SecureFileSystemWebApplication {
                 User user = User.builder()
                         .firstName(firstName)
                         .lastName(lastName)
-                        .age(faker.number().numberBetween(18,150))
+                        .age(faker.number().numberBetween(18,90))
                         .email(String.format("%s.%s@gmail.com", firstName, lastName))
                         .phoneNumber(faker.phoneNumber().phoneNumber())
                         .build();

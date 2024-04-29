@@ -1,0 +1,323 @@
+[
+  {
+    "id": 1,
+    "file_name": "report_2024_01.pdf",
+    "size": 24534,
+    "extension": "pdf",
+    "languages": [
+      "ENGLISH",
+      "FRENCH"
+    ],
+    "owner_id": 1
+  },
+  {
+    "id": 2,
+    "file_name": "presentation_final_v2.pptx",
+    "size": 38567,
+    "extension": "pptx",
+    "languages": [
+      "SPANISH",
+      "ITALIAN",
+      "GERMAN"
+    ],
+    "owner_id": 2
+  },
+  {
+    "id": 3,
+    "file_name": "project_plan_2024.docx",
+    "size": 45678,
+    "extension": "docx",
+    "languages": [
+      "FRENCH"
+    ],
+    "owner_id": 3
+  },
+  {
+    "id": 4,
+    "file_name": "meeting_notes_2024.txt",
+    "size": 18976,
+    "extension": "txt",
+    "languages": [
+      "GERMAN"
+    ],
+    "owner_id": 4
+  },
+  {
+    "id": 5,
+    "file_name": "prototype_v3.zip",
+    "size": 28765,
+    "extension": "zip",
+    "languages": [
+      "ITALIAN"
+    ],
+    "owner_id": 5
+  },
+  {
+    "id": 6,
+    "file_name": "analysis_results.xlsx",
+    "size": 32654,
+    "extension": "xlsx",
+    "languages": [
+      "PORTUGUESE",
+      "FRENCH"
+    ],
+    "owner_id": 6
+  },
+  {
+    "id": 7,
+    "file_name": "survey_data_2024.csv",
+    "size": 42589,
+    "extension": "csv",
+    "languages": [
+      "ENGLISH"
+    ],
+    "owner_id": 7
+  },
+  {
+    "id": 8,
+    "file_name": "app_design_drafts.sketch",
+    "size": 29876,
+    "extension": "sketch",
+    "languages": [
+      "SPANISH",
+      "GERMAN"
+    ],
+    "owner_id": 8
+  },
+  {
+    "id": 9,
+    "file_name": "website_mockups_2024.fig",
+    "size": 36789,
+    "extension": "fig",
+    "languages": [
+      "FRENCH",
+      "ITALIAN"
+    ],
+    "owner_id": 9
+  },
+  {
+    "id": 10,
+    "file_name": "code_samples_v2.py",
+    "size": 24987,
+    "extension": "py",
+    "languages": [
+      "GERMAN"
+    ],
+    "owner_id": 10
+  },
+  {
+    "id": 11,
+    "file_name": "testing_reports.docx",
+    "size": 31245,
+    "extension": "docx",
+    "languages": [
+      "ITALIAN",
+      "PORTUGUESE",
+      "ENGLISH"
+    ],
+    "owner_id": 11
+  },
+  {
+    "id": 12,
+    "file_name": "financial_analysis.xls",
+    "size": 28765,
+    "extension": "xls",
+    "languages": [
+      "PORTUGUESE"
+    ],
+    "owner_id": 12
+  },
+  {
+    "id": 13,
+    "file_name": "proposal_drafts.pptx",
+    "size": 37896,
+    "extension": "pptx",
+    "languages": [
+      "ENGLISH"
+    ],
+    "owner_id": 13
+  },
+  {
+    "id": 14,
+    "file_name": "marketing_strategy.pdf",
+    "size": 29987,
+    "extension": "pdf",
+    "languages": [
+      "SPANISH",
+      "FRENCH"
+    ],
+    "owner_id": 14
+  },
+  {
+    "id": 15,
+    "file_name": "user_manual_2024.docx",
+    "size": 35876,
+    "extension": "docx",
+    "languages": [
+      "FRENCH",
+      "ITALIAN"
+    ],
+    "owner_id": 15
+  },
+  {
+    "id": 16,
+    "file_name": "client_feedback.xlsx",
+    "size": 28765,
+    "extension": "xlsx",
+    "languages": [
+      "GERMAN",
+      "SPANISH"
+    ],
+    "owner_id": 1
+  },
+  {
+    "id": 17,
+    "file_name": "product_specifications.docx",
+    "size": 39876,
+    "extension": "docx",
+    "languages": [
+      "ITALIAN"
+    ],
+    "owner_id": 2
+  },
+  {
+    "id": 18,
+    "file_name": "training_materials_v2.pptx",
+    "size": 28765,
+    "extension": "pptx",
+    "languages": [
+      "PORTUGUESE",
+      "ENGLISH"
+    ],
+    "owner_id": 3
+  },
+  {
+    "id": 19,
+    "file_name": "bug_fixes_report.txt",
+    "size": 23876,
+    "extension": "txt",
+    "languages": [
+      "ENGLISH",
+      "SPANISH",
+      "ITALIAN"
+    ],
+    "owner_id": 4
+  },
+  {
+    "id": 20,
+    "file_name": "release_notes_2024.pdf",
+    "size": 37896,
+    "extension": "pdf",
+    "languages": [
+      "SPANISH",
+      "PORTUGUESE"
+    ],
+    "owner_id": 5
+  },
+  {
+    "id": 21,
+    "file_name": "technical_documentation.docx",
+    "size": 29654,
+    "extension": "docx",
+    "languages": [
+      "FRENCH"
+    ],
+    "owner_id": 6
+  },
+  {
+    "id": 22,
+    "file_name": "api_documentation_v2.pdf",
+    "size": 36489,
+    "extension": "pdf",
+    "languages": [
+      "GERMAN"
+    ],
+    "owner_id": 7
+  },
+  {
+    "id": 23,
+    "file_name": "project_timeline.xlsx",
+    "size": 28765,
+    "extension": "xlsx",
+    "languages": [
+      "ITALIAN",
+      "ENGLISH"
+    ],
+    "owner_id": 8
+  },
+  {
+    "id": 24,
+    "file_name": "task_list_2024.csv",
+    "size": 39876,
+    "extension": "csv",
+    "languages": [
+      "PORTUGUESE"
+    ],
+    "owner_id": 9
+  },
+  {
+    "id": 25,
+    "file_name": "error_logs_2024.txt",
+    "size": 28976,
+    "extension": "txt",
+    "languages": [
+      "ENGLISH",
+      "SPANISH"
+    ],
+    "owner_id": 10
+  },
+  {
+    "id": 26,
+    "file_name": "security_audit_report.pdf",
+    "size": 37654,
+    "extension": "pdf",
+    "languages": [
+      "SPANISH"
+    ],
+    "owner_id": 11
+  },
+  {
+    "id": 27,
+    "file_name": "backup_plan.docx",
+    "size": 28765,
+    "extension": "docx",
+    "languages": [
+      "FRENCH",
+      "GERMAN"
+    ],
+    "owner_id": 12
+  },
+  {
+    "id": 28,
+    "file_name": "architecture_diagrams.pptx",
+    "size": 39876,
+    "extension": "pptx",
+    "languages": [
+      "GERMAN",
+      "ITALIAN"
+    ],
+    "owner_id": 13
+  },
+  {
+    "id": 29,
+    "file_name": "performance_metrics.xlsx",
+    "size": 28765,
+    "extension": "xlsx",
+    "languages": [
+      "ITALIAN",
+      "PORTUGUESE"
+    ],
+    "owner_id": 14
+  },
+  {
+    "id": 30,
+    "file_name": "compliance_checklist.pdf",
+    "size": 38976,
+    "extension": "pdf",
+    "languages": [
+      "PORTUGUESE",
+      "FRENCH"
+    ],
+    "owner_id": 15
+  }
+]

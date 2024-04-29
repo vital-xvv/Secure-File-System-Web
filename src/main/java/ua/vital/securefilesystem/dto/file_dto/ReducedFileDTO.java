@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 import ua.vital.securefilesystem.dto.user_dto.ReducedUserDTO;
 import ua.vital.securefilesystem.model.File;
+import ua.vital.securefilesystem.model.Language;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public class ReducedFileDTO {
     private String fileName;
     private Integer size;
     private String extension;
-    private List<File.Language> languages;
+    private List<Language> languages;
     private ReducedUserDTO owner;
 
     public static ReducedFileDTO fromFile(File file){

@@ -1,16 +1,26 @@
 spring:
+  profiles:
+    active: dev
   application:
-    name: secure-file-system
+    name: ${APPLICATION_NAME}
 
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/sec_file_system_db
-    password: 12062003
-    username: postgres
+    url: ${DB_URL}
+    password: ${DB_PASSWORD}
+    username: ${DB_USERNAME}
 
   jpa:
     show-sql: true
     database: postgresql
-    generate-ddl: true
+    generate-ddl: false
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: none
+
+  liquibase:
+    change-log: db/changelog/main-changelog.yml
+    enabled: true
+
+server:
+  servlet:
+    context-path: /api

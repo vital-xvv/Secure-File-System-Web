@@ -4,7 +4,7 @@ import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import ua.vital.securefilesystem.model.File;
+import ua.vital.securefilesystem.model.Language;
 
 import java.util.List;
 
@@ -12,16 +12,15 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 public class UploadFileDTO {
-    @NotBlank
+    @NotBlank(message = "FileName can not be null nor empty.")
     private String fileName;
-    @NotNull
-    @PositiveOrZero
+    @NotNull(message = "Size can not be null.")
+    @PositiveOrZero(message = "Size should be equal or greater than zero.")
     private Integer size;
-    @NotBlank
     private String extension;
-    @NotEmpty
-    private List<File.Language> languages;
-    @NotNull
-    @Positive
+    @NotEmpty(message = "File should be written in at least one language.")
+    private List<Language> languages;
+    @NotNull(message = "File owner can not be null.")
+    @Positive(message = "File owner id should be greater than zero.")
     private Integer ownerId;
 }

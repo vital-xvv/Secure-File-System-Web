@@ -16,7 +16,8 @@ public class CreateUserDTO {
     @NotBlank
     private String phoneNumber;
     @Positive
-    @Max(120)
+    @Max(90)
+    @Min(18)
     private int age;
 
     public User toUser() {
