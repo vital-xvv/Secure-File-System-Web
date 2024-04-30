@@ -18,7 +18,6 @@ import ua.vital.securefilesystem.service.FileService;
 
 
 import java.io.IOException;
-import java.util.Map;
 
 @Slf4j
 @RequestMapping("/file")
@@ -30,13 +29,13 @@ public class FileController {
     private final CustomJsonParser jsonParser;
 
     @PostMapping
-    public File uploadFile(@Valid @RequestBody UploadFileDTO file){
-        return fileService.createFile(file);
+    public ResponseEntity<File> uploadFile(@Valid @RequestBody UploadFileDTO file){
+        return ResponseEntity.status(HttpStatus.CREATED).body(fileService.createFile(file));
     }
 
     @GetMapping("/{id}")
-    public File getFileById(@PathVariable(name = "id") Integer id){
-        return fileRepository.findById(id).orElse(File.builder().build());
+    public ResponseEntity<File> getFileById(@PathVariable(name = "id") Integer id){
+        return ResponseEntity.ok(fileRepository.findById(id).orElse(File.builder().build()));
     }
 
     @DeleteMapping("/{id}")
@@ -45,15 +44,15 @@ public class FileController {
     }
 
     @PutMapping("/{id}")
-    public File updateFileById(@PathVariable(name = "id") Integer id,
+    public ResponseEntity<File> updateFileById(@PathVariable(name = "id") Integer id,
                                @Valid @RequestBody UploadFileDTO fileDTO){
-        return fileService.updateFileByID(id, fileDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(fileService.updateFileByID(id, fileDTO));
     }
 
     @PostMapping("/_list")
-    public Map<String, ?> findFilesWithFilterAndPagination(
+    public ResponseEntity<PagedAndFilteredFilesDTO> findFilesWithFilterAndPagination(
             @Valid @RequestBody PaginationFilterFileDTO dto){
-        return fileService.getPaginatedAndFilteredFiles(dto);
+        return ResponseEntity.ok(fileService.getPaginatedAndFilteredFiles(dto));
     }
 
     @PostMapping("/_report")

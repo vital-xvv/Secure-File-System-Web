@@ -1,0 +1,218 @@
+[
+  {
+    "id": 1,
+    "file_name": "user_feedback.docx",
+    "size": 28765,
+    "extension": "docx",
+    "languages": [
+      "ENGLISH",
+      "FRENCH"
+    ],
+    "owner_id": 1
+  },
+  {
+    "id": 2,
+    "file_name": "sales_report_2024.xlsx",
+    "size": 39876,
+    "extension": "xlsx",
+    "languages": [
+      "SPANISH",
+      "PORTUGUESE"
+    ],
+    "owner_id": 2
+  },
+  {
+    "id": 3,
+    "file_name": "marketing_campaign.pdf",
+    "size": 29987,
+    "extension": "pdf",
+    "languages": [
+      "ITALIAN",
+      "FRENCH"
+    ],
+    "owner_id": 3
+  },
+  {
+    "id": 4,
+    "file_name": "product_demo_video.mp4",
+    "size": 18976,
+    "extension": "mp4",
+    "languages": [
+      "ENGLISH"
+    ],
+    "owner_id": 4
+  },
+  {
+    "id": 5,
+    "file_name": "research_paper.docx",
+    "size": 35678,
+    "extension": "docx",
+    "languages": [
+      "GERMAN",
+      "FRENCH"
+    ],
+    "owner_id": 5
+  },
+  {
+    "id": 6,
+    "file_name": "presentation_slides.pptx",
+    "size": 27654,
+    "extension": "pptx",
+    "languages": [
+      "SPANISH",
+      "ITALIAN"
+    ],
+    "owner_id": 6
+  },
+  {
+    "id": 7,
+    "file_name": "project_proposal.pdf",
+    "size": 39876,
+    "extension": "pdf",
+    "languages": [
+      "ENGLISH",
+      "FRENCH"
+    ],
+    "owner_id": 7
+  },
+  {
+    "id": 8,
+    "file_name": "customer_survey_results.xlsx",
+    "size": 32789,
+    "extension": "xlsx",
+    "languages": [
+      "ENGLISH",
+      "SPANISH"
+    ],
+    "owner_id": 8
+  },
+  {
+    "id": 9,
+    "file_name": "training_manual.docx",
+    "size": 29876,
+    "extension": "docx",
+    "languages": [
+      "GERMAN"
+    ],
+    "owner_id": 9
+  },
+  {
+    "id": 10,
+    "file_name": "product_catalog.pdf",
+    "size": 35678,
+    "extension": "pdf",
+    "languages": [
+      "ITALIAN",
+      "FRENCH"
+    ],
+    "owner_id": 10
+  },
+  {
+    "id": 11,
+    "file_name": "bug_tracking_sheet.xlsx",
+    "size": 28765,
+    "extension": "xlsx",
+    "languages": [
+      "ENGLISH",
+      "SPANISH"
+    ],
+    "owner_id": 11
+  },
+  {
+    "id": 12,
+    "file_name": "customer_support_manual.docx",
+    "size": 32789,
+    "extension": "docx",
+    "languages": [
+      "ENGLISH",
+      "FRENCH"
+    ],
+    "owner_id": 12
+  },
+  {
+    "id": 13,
+    "file_name": "product_demo_script.txt",
+    "size": 19876,
+    "extension": "txt",
+    "languages": [
+      "ENGLISH"
+    ],
+    "owner_id": 13
+  },
+  {
+    "id": 14,
+    "file_name": "financial_report.pdf",
+    "size": 39987,
+    "extension": "pdf",
+    "languages": [
+      "SPANISH",
+      "PORTUGUESE"
+    ],
+    "owner_id": 14
+  },
+  {
+    "id": 15,
+    "file_name": "customer_feedback_form.docx",
+    "size": 27876,
+    "extension": "docx",
+    "languages": [
+      "ENGLISH",
+      "FRENCH"
+    ],
+    "owner_id": 15
+  },
+  {
+    "id": 16,
+    "file_name": "project_timeline.pptx",
+    "size": 35678,
+    "extension": "pptx",
+    "languages": [
+      "SPANISH",
+      "ITALIAN"
+    ],
+    "owner_id": 1
+  },
+  {
+    "id": 17,
+    "file_name": "software_requirements.docx",
+    "size": 28765,
+    "extension": "docx",
+    "languages": [
+      "ENGLISH",
+      "GERMAN"
+    ],
+    "owner_id": 2
+  },
+  {
+    "id": 18,
+    "file_name": "product_demo_photos.zip",
+    "size": 24567,
+    "extension": "zip",
+    "languages": [
+      "ENGLISH"
+    ],
+    "owner_id": 3
+  },
+  {
+    "id": 19,
+    "file_name": "marketing_plan.pptx",
+    "size": 37654,
+    "extension": "pptx",
+    "languages": [
+      "ENGLISH",
+      "SPANISH"
+    ],
+    "owner_id": 4
+  },
+  {
+    "id": 20,
+    "file_name": "customer_survey_form.xlsx",
+    "size": 29876,
+    "extension": "xlsx",
+    "languages": [
+      "ENGLISH",
+      "FRENCH"
+    ],
+    "owner_id": 5
+  }
+]

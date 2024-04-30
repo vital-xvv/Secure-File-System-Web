@@ -1,21 +1,27 @@
 spring:
   profiles:
-    active: dev
+    active: test
   application:
     name: ${APPLICATION_NAME}
 
   datasource:
-    driver-class-name: org.postgresql.Driver
+    driver-class-name: ${DB_DRIVER}
     url: ${DB_URL}
     password: ${DB_PASSWORD}
     username: ${DB_USERNAME}
 
   jpa:
     show-sql: true
-    database: postgresql
+    database: ${DB_TYPE}
     generate-ddl: false
     hibernate:
       ddl-auto: none
+    properties:
+      hibernate:
+        format_sql: true
+
+
+
 
   liquibase:
     change-log: db/changelog/main-changelog.yml
@@ -24,3 +30,4 @@ spring:
 server:
   servlet:
     context-path: /api
+  port: 8080

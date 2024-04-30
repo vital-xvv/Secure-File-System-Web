@@ -25,7 +25,6 @@ import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -92,7 +91,7 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public Map<String, ?> getPaginatedAndFilteredFiles(PaginationFilterFileDTO fileDTO) {
+    public PagedAndFilteredFilesDTO getPaginatedAndFilteredFiles(PaginationFilterFileDTO fileDTO) {
         //Defining Pageable object
         Pageable pageable = PageRequest.of(fileDTO.getPage(), fileDTO.getSize());
 
@@ -109,10 +108,7 @@ public class FileServiceImpl implements FileService {
                     .map(ReducedFileDTO::fromFile)
                     .toList();
 
-        return Map.of(
-                "list", reducedFiles,
-                "totalPages", page.getTotalPages(),
-                "totalElements", page.getTotalElements());
+        return new PagedAndFilteredFilesDTO(reducedFiles, page.getTotalPages(), page.getTotalElements());
     }
 
 

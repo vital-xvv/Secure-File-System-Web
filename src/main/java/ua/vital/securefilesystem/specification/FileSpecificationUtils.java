@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileSpecificationUtils {
+
     public static Specification<File> hasOwnerId(int ownerId){
         return (
                 Root<File> root,
@@ -27,7 +28,6 @@ public class FileSpecificationUtils {
         ) -> builder.equal(root.get("extension"), extension);
 
     }
-
 
     public static Specification<File> getFileSpecificationByFilterProps(FileFilterDTO fileDTO){
         //Defining Specification for filtering

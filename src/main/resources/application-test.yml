@@ -1,0 +1,16 @@
+APPLICATION_NAME: secure-file-system
+
+#Datasource config
+DB_URL: jdbc:h2:mem:testdb;MODE=PostgreSQL
+DB_PASSWORD:
+DB_USERNAME: sa
+DB_DRIVER: org.h2.Driver
+DB_TYPE: h2
+
+spring:
+  jpa:
+    show-sql: false
+  h2:
+    console:
+      enabled: true
+      path: /h2

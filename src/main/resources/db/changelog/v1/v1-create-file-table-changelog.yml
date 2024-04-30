@@ -33,7 +33,7 @@ databaseChangeLog:
                   type: varchar(10)
               - column:
                   name: languages
-                  type: smallint[]
+                  type: integer array
                   constraints:
                     nullable: false
               - column:

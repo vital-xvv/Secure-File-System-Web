@@ -5,6 +5,7 @@ import lombok.Data;
 import ua.vital.securefilesystem.dto.user_dto.ReducedUserDTO;
 import ua.vital.securefilesystem.model.File;
 import ua.vital.securefilesystem.model.Language;
+import ua.vital.securefilesystem.model.User;
 
 import java.util.List;
 
@@ -26,6 +27,17 @@ public class ReducedFileDTO {
                 .languages(file.getLanguages())
                 .extension(file.getExtension())
                 .owner(ReducedUserDTO.fromUser(file.getOwner()))
+                .build();
+    }
+
+    public File toFile(){
+        return File.builder()
+                .id(getId())
+                .fileName(getFileName())
+                .extension(getExtension())
+                .size(getSize())
+                .owner(User.builder().id(getOwner().getId()).build())
+                .languages(getLanguages())
                 .build();
     }
 }
