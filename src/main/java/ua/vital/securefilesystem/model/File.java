@@ -14,7 +14,9 @@ import java.util.List;
  * @author Vitalii Huzii
  */
 @Entity
-@Table(name = "Files")
+@Table(name = "Files",
+    indexes = @Index(name="idx_file_extension",
+    columnList = "extension"))
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -32,7 +34,7 @@ public class File {
     private List<Language> languages;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "owner_id")
     private User owner;
 

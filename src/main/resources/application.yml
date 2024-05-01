@@ -20,9 +20,6 @@ spring:
       hibernate:
         format_sql: true
 
-
-
-
   liquibase:
     change-log: db/changelog/main-changelog.yml
     enabled: true

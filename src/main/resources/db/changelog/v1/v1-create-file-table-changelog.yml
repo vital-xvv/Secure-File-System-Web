@@ -33,7 +33,7 @@ databaseChangeLog:
                   type: varchar(10)
               - column:
                   name: languages
-                  type: integer array
+                  type: ${DB_LANG_COLUMN_DEFINITION}
                   constraints:
                     nullable: false
               - column:
