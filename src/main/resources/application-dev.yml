@@ -1,0 +1,8 @@
+APPLICATION_NAME: secure-file-system
+
+#Datasource config
+DB_URL: jdbc:postgresql://localhost:5432/sec_file_system_db
+DB_PASSWORD: 12062003
+DB_USERNAME: postgres
+DB_DRIVER: org.postgresql.Driver
+DB_TYPE: postgresql

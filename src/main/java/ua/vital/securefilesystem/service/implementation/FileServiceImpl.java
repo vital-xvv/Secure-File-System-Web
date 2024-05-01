@@ -2,6 +2,7 @@ package ua.vital.securefilesystem.service.implementation;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.springframework.core.io.InputStreamResource;
@@ -26,6 +27,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class FileServiceImpl implements FileService {
@@ -65,6 +67,16 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
+    public File findFileById(Integer id) {
+        return fileRepository.findById(id).orElse(File.builder().build());
+    }
+
+    @Override
+    public void deleteFileById(Integer id) {
+        fileRepository.deleteById(id);
+    }
+
+    @Override
     @Transactional
     public InputStreamResource exportCSVReport(FileFilterDTO fileDTO) throws IOException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -91,6 +103,7 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
+    @Transactional
     public PagedAndFilteredFilesDTO getPaginatedAndFilteredFiles(PaginationFilterFileDTO fileDTO) {
         //Defining Pageable object
         Pageable pageable = PageRequest.of(fileDTO.getPage(), fileDTO.getSize());
@@ -111,8 +124,7 @@ public class FileServiceImpl implements FileService {
         return new PagedAndFilteredFilesDTO(reducedFiles, page.getTotalPages(), page.getTotalElements());
     }
 
-
-    private static void printRecordInCSV(CSVPrinter csvPrinter, File file, DateTimeFormatter formatter) {
+    private void printRecordInCSV(CSVPrinter csvPrinter, File file, DateTimeFormatter formatter) {
         try{
             csvPrinter.printRecord(
                     file.getId(),
@@ -124,8 +136,8 @@ public class FileServiceImpl implements FileService {
                     file.getModifiedAt().format(formatter),
                     file.getOwner().getId());
         }catch (IOException io) {
-            //TODO
-            io.printStackTrace();
+            log.error("Error occurred while printing CSV record for file: "
+                    + file.getFileName() + "\n" + io.getMessage());
         }
     }
 }

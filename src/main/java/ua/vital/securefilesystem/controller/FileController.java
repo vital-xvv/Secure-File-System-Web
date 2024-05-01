@@ -2,7 +2,6 @@ package ua.vital.securefilesystem.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -13,18 +12,14 @@ import org.springframework.web.multipart.MultipartFile;
 import ua.vital.securefilesystem.dto.file_dto.*;
 import ua.vital.securefilesystem.json.CustomJsonParser;
 import ua.vital.securefilesystem.model.File;
-import ua.vital.securefilesystem.repository.FileRepository;
 import ua.vital.securefilesystem.service.FileService;
-
 
 import java.io.IOException;
 
-@Slf4j
 @RequestMapping("/file")
 @RestController
 @RequiredArgsConstructor
 public class FileController {
-    private final FileRepository fileRepository;
     private final FileService fileService;
     private final CustomJsonParser jsonParser;
 
@@ -35,12 +30,13 @@ public class FileController {
 
     @GetMapping("/{id}")
     public ResponseEntity<File> getFileById(@PathVariable(name = "id") Integer id){
-        return ResponseEntity.ok(fileRepository.findById(id).orElse(File.builder().build()));
+        return ResponseEntity.ok(fileService.findFileById(id));
     }
 
+    @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/{id}")
     public void deleteFileById(@PathVariable(name = "id") Integer id){
-        fileRepository.deleteById(id);
+        fileService.deleteFileById(id);
     }
 
     @PutMapping("/{id}")

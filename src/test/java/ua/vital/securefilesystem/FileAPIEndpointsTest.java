@@ -8,6 +8,8 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -19,12 +21,11 @@ import org.springframework.test.web.servlet.request.MockMultipartHttpServletRequ
 import ua.vital.securefilesystem.dto.file_dto.PagedAndFilteredFilesDTO;
 import ua.vital.securefilesystem.model.File;
 import ua.vital.securefilesystem.repository.FileRepository;
-import ua.vital.securefilesystem.service.FileService;
 
 import java.io.FileInputStream;
 import java.util.List;
 
-import static ua.vital.securefilesystem.FileTestUtils.*;
+import static ua.vital.securefilesystem.utils.FileTestUtils.*;
 import static ua.vital.securefilesystem.model.Language.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -42,7 +43,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class FileAPIEndpointsTest {
 
     private final MockMvc mvc;
-    private final FileService fileService;
     private final FileRepository fileRepository;
     private final ObjectMapper mapper;
 
@@ -50,11 +50,9 @@ public class FileAPIEndpointsTest {
 
     public FileAPIEndpointsTest(
             MockMvc mvc,
-            FileService fileService,
             FileRepository fileRepository,
             ObjectMapper mapper) {
         this.mvc = mvc;
-        this.fileService = fileService;
         this.fileRepository = fileRepository;
         this.mapper = mapper;
     }
@@ -138,6 +136,7 @@ public class FileAPIEndpointsTest {
         GET - /api/file/{id}
     */
     @Test
+    @Order(3)
     public void findFileByIdTest() throws Exception {
         //given
         int fileId = 1;
@@ -159,6 +158,7 @@ public class FileAPIEndpointsTest {
         {...}
     */
     @Test
+    @Order(4)
     public void updateFileByIdTest() throws Exception {
         //given
         int idToUpdate = 2;
@@ -189,28 +189,11 @@ public class FileAPIEndpointsTest {
 
 
     /*
-        DELETE - /api/file/{id}
-    */
-    @Test
-    public void deleteFileByIdTest() throws Exception {
-        //given
-        int idToDelete = 21;
-
-        //when
-        mvc.perform(delete(contextPath + "/" + idToDelete)).andExpect(status().isOk());
-        File file = fileRepository.findById(idToDelete).orElse(null);
-
-        //then
-        assertEquals(20, fileRepository.count());
-        assertNull(file);
-    }
-
-
-    /*
         POST - /api/file/_list
         {...}
     */
     @Test
+    @Order(5)
     public void getFilteredPageOfFilesTest() throws Exception {
         //given
         String jsonBody = """
@@ -246,6 +229,7 @@ public class FileAPIEndpointsTest {
         {...}
     */
     @Test
+    @Order(6)
     public void getCSVReportTest() throws Exception {
         //given
         String jsonBody =
@@ -275,6 +259,25 @@ public class FileAPIEndpointsTest {
                 35678, "pdf", 10, ITALIAN, FRENCH);
         assertFileCsvRecordMatches(records.get(4), 14, "financial_report.pdf",
                 39987, "pdf", 14, SPANISH, PORTUGUESE);
+
+    }
+
+
+    /*
+        DELETE - /api/file/{id}
+    */
+    @Order(7)
+    @ParameterizedTest
+    @ValueSource(ints = {21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11,
+                        10, 9, 8, 7, 6, 5, 4, 3, 2, 1})
+    public void deleteFromDBTest(int id) throws Exception {
+        //when
+        mvc.perform(delete(contextPath + "/{id}", id)).andExpect(status().isOk());
+        File file = fileRepository.findById(id).orElse(null);
+
+        //then
+        assertNull(file);
+        assertEquals(id-1, fileRepository.count());
     }
 
 }

@@ -16,5 +16,9 @@ public interface FileService {
 
     File updateFileByID(Integer id, UploadFileDTO fileDTO);
 
+    File findFileById(Integer id);
+
+    void deleteFileById(Integer id);
+
     InputStreamResource exportCSVReport(FileFilterDTO dto) throws IOException;
 }

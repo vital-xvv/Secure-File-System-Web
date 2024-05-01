@@ -1,4 +1,4 @@
-package ua.vital.securefilesystem;
+package ua.vital.securefilesystem.utils;
 
 import org.apache.commons.csv.CSVRecord;
 import ua.vital.securefilesystem.model.File;

@@ -50,3 +50,17 @@ databaseChangeLog:
                     referencedTableName: users
                     referencedColumnNames: id
                     nullable: false
+  - changeSet:
+      id: v1-4
+      author: Vitalii Huzii
+      preConditions:
+        - onFail: HALT
+        - tableExists:
+            tableName: files
+      changes:
+        - createIndex:
+            indexName: idx_file_extension
+            tableName: files
+            columns:
+              - column:
+                  name: extension
