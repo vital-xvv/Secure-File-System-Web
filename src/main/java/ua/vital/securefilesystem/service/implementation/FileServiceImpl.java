@@ -11,18 +11,24 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ua.vital.securefilesystem.dto.file_dto.*;
 import ua.vital.securefilesystem.model.File;
+import ua.vital.securefilesystem.model.HttpResponse;
 import ua.vital.securefilesystem.model.User;
 import ua.vital.securefilesystem.repository.FileRepository;
+import ua.vital.securefilesystem.repository.UserRepository;
 import ua.vital.securefilesystem.service.FileService;
+import ua.vital.securefilesystem.service.UserService;
 import ua.vital.securefilesystem.specification.FileSpecificationUtils;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -32,6 +38,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class FileServiceImpl implements FileService {
     private final FileRepository fileRepository;
+    private final UserRepository userRepository;
 
     @Override
     public File createFile(UploadFileDTO file) {
@@ -48,22 +55,33 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public File updateFileByID(Integer id, UploadFileDTO fileDTO) {
-        return fileRepository.save(
-                File.builder()
-                        .id(id)
-                        .fileName(fileDTO.getFileName())
-                        .createdAt(
-                                fileRepository.findById(id).orElse(
-                                    File.builder()
-                                        .createdAt(LocalDateTime.now())
-                                        .build()).getCreatedAt())
-                        .modifiedAt(LocalDateTime.now())
-                        .owner(User.builder().id(fileDTO.getOwnerId()).build())
-                        .extension(fileDTO.getExtension())
-                        .size(fileDTO.getSize())
-                        .languages(fileDTO.getLanguages())
+    public ResponseEntity<?> updateFileByID(Integer id, UploadFileDTO fileDTO) {
+        boolean userExists = userRepository.existsById(fileDTO.getOwnerId());
+        if(userExists) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(ReducedFileDTO.fromFile(fileRepository.save(
+                    File.builder()
+                            .id(id)
+                            .fileName(fileDTO.getFileName())
+                            .createdAt(
+                                    fileRepository.findById(id).orElse(
+                                            File.builder()
+                                                    .createdAt(LocalDateTime.now())
+                                                    .build()).getCreatedAt())
+                            .modifiedAt(LocalDateTime.now())
+                            .owner(User.builder().id(fileDTO.getOwnerId()).build())
+                            .extension(fileDTO.getExtension())
+                            .size(fileDTO.getSize())
+                            .languages(fileDTO.getLanguages())
+                            .build())));
+        } else
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                HttpResponse.builder()
+                        .timestamp(LocalDateTime.now())
+                        .message("User with id %d does not exist".formatted(fileDTO.getOwnerId()))
+                        .httpStatus(HttpStatus.BAD_REQUEST.name())
+                        .statusCode(HttpStatus.BAD_REQUEST.value())
                         .build());
+
     }
 
     @Override
@@ -72,8 +90,20 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public void deleteFileById(Integer id) {
-        fileRepository.deleteById(id);
+    public ResponseEntity<?> deleteFileById(Integer id) {
+        boolean fileExists = fileRepository.existsById(id);
+        if(fileExists) {
+            fileRepository.deleteById(id);
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.internalServerError()
+                    .body(HttpResponse.builder()
+                            .message("File with id: %d does not exist".formatted(id))
+                            .timestamp(LocalDateTime.now())
+                            .statusCode(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                            .httpStatus(HttpStatus.INTERNAL_SERVER_ERROR.name())
+                            .build());
+        }
     }
 
     @Override

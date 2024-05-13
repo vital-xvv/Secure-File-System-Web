@@ -1,10 +1,8 @@
 package ua.vital.securefilesystem.service;
 
 import org.springframework.core.io.InputStreamResource;
-import ua.vital.securefilesystem.dto.file_dto.FileFilterDTO;
-import ua.vital.securefilesystem.dto.file_dto.PagedAndFilteredFilesDTO;
-import ua.vital.securefilesystem.dto.file_dto.PaginationFilterFileDTO;
-import ua.vital.securefilesystem.dto.file_dto.UploadFileDTO;
+import org.springframework.http.ResponseEntity;
+import ua.vital.securefilesystem.dto.file_dto.*;
 import ua.vital.securefilesystem.model.File;
 
 import java.io.IOException;
@@ -14,11 +12,11 @@ public interface FileService {
 
     File createFile(UploadFileDTO file);
 
-    File updateFileByID(Integer id, UploadFileDTO fileDTO);
+    ResponseEntity<?> updateFileByID(Integer id, UploadFileDTO fileDTO);
 
     File findFileById(Integer id);
 
-    void deleteFileById(Integer id);
+    ResponseEntity<?> deleteFileById(Integer id);
 
     InputStreamResource exportCSVReport(FileFilterDTO dto) throws IOException;
 }

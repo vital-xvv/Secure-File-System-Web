@@ -12,10 +12,14 @@ import org.springframework.web.multipart.MultipartFile;
 import ua.vital.securefilesystem.dto.file_dto.*;
 import ua.vital.securefilesystem.json.CustomJsonParser;
 import ua.vital.securefilesystem.model.File;
+import ua.vital.securefilesystem.model.Language;
 import ua.vital.securefilesystem.service.FileService;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3050", maxAge = 3600)
 @RequestMapping("/file")
 @RestController
 @RequiredArgsConstructor
@@ -33,16 +37,21 @@ public class FileController {
         return ResponseEntity.ok(fileService.findFileById(id));
     }
 
+    @GetMapping("/languages")
+    public ResponseEntity<List<Language>> getLanguages(){
+        return ResponseEntity.ok(Arrays.asList(Language.values()));
+    }
+
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/{id}")
-    public void deleteFileById(@PathVariable(name = "id") Integer id){
-        fileService.deleteFileById(id);
+    public ResponseEntity<?> deleteFileById(@PathVariable(name = "id") Integer id){
+        return fileService.deleteFileById(id);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<File> updateFileById(@PathVariable(name = "id") Integer id,
+    public ResponseEntity<?> updateFileById(@PathVariable(name = "id") Integer id,
                                @Valid @RequestBody UploadFileDTO fileDTO){
-        return ResponseEntity.status(HttpStatus.CREATED).body(fileService.updateFileByID(id, fileDTO));
+        return fileService.updateFileByID(id, fileDTO);
     }
 
     @PostMapping("/_list")

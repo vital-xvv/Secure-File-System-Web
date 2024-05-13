@@ -64,3 +64,15 @@ databaseChangeLog:
             columns:
               - column:
                   name: extension
+
+  - changeSet:
+      id: v1-5
+      author: Vitalii Huzii
+      preConditions:
+        - onFail: MARK_RAN
+        - tableIsEmpty:
+            tableName: files
+      changes:
+        - loadData:
+            tableName: files
+            file: db/changelog/data/test-files.csv

@@ -66,7 +66,7 @@ public class FileAPIEndpointsTest {
     public void fileUploadInBatchesTest() throws Exception {
 
         //given
-        java.io.File testFile = new java.io.File("src/test/resources/dataset/test-files.json");
+        java.io.File testFile = new java.io.File("src/test/resources/dataset/test-files.csv");
 
         MockMultipartFile dataSet = new MockMultipartFile("file", "test-upload.json",
                 "application/json", new FileInputStream(testFile));

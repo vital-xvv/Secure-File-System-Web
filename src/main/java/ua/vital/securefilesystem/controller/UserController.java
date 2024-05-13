@@ -11,6 +11,7 @@ import ua.vital.securefilesystem.service.UserService;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3050", maxAge = 3600)
 @RestController
 @RequestMapping("/user")
 @RequiredArgsConstructor

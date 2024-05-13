@@ -1,0 +1,21 @@
+id,file_name,size,extension,languages,owner_id
+1,user_feedback.docx,28765,docx,"{0, 4}",1
+2,sales_report_2024.xlsx,39876,xlsx,"{5, 11, 8}",2
+3,marketing_campaign.pdf,29987,pdf,"{11, 4}",3
+4,product_demo_video.mp4,18976,mp4,"{0}",4
+5,research_paper.docx,35678,docx,"{3, 4}",5
+6,presentation_slides.pptx,27654,pptx,"{5, 11}",6
+7,project_proposal.pdf,39876,pdf,"{0, 4}",7
+8,customer_survey_results.xlsx,32789,xlsx,"{0, 5}",8
+9,training_manual.docx,29876,docx,"{3}",9
+10,product_catalog.pdf,35678,pdf,"{11, 4}",10
+11,bug_tracking_sheet.xlsx,28765,xlsx,"{0, 5}",11
+12,customer_support_manual.docx,32789,docx,"{0, 4}",12
+13,product_demo_script.txt,19876,txt,"{0}",13
+14,financial_report.pdf,39987,pdf,"{5, 11}",14
+15,customer_feedback_form.docx,27876,docx,"{0, 4}",15
+16,project_timeline.pptx,35678,pptx,"{5, 11}",1
+17,software_requirements.docx,28765,docx,"{0, 3}",2
+18,product_demo_photos.zip,24567,zip,"{0}",3
+19,marketing_plan.pptx,37654,pptx,"{0, 5}",4
+20,customer_survey_form.xlsx,29876,xlsx,"{0, 4}",5
