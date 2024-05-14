@@ -10,7 +10,7 @@ import java.io.IOException;
 public interface FileService {
     PagedAndFilteredFilesDTO getPaginatedAndFilteredFiles(PaginationFilterFileDTO fileDTO);
 
-    File createFile(UploadFileDTO file);
+    ResponseEntity<?> createFile(UploadFileDTO file);
 
     ResponseEntity<?> updateFileByID(Integer id, UploadFileDTO fileDTO);
 

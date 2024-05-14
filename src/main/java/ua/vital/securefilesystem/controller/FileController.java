@@ -28,8 +28,8 @@ public class FileController {
     private final CustomJsonParser jsonParser;
 
     @PostMapping
-    public ResponseEntity<File> uploadFile(@Valid @RequestBody UploadFileDTO file){
-        return ResponseEntity.status(HttpStatus.CREATED).body(fileService.createFile(file));
+    public ResponseEntity<?> createFile(@Valid @RequestBody UploadFileDTO file){
+        return fileService.createFile(file);
     }
 
     @GetMapping("/{id}")

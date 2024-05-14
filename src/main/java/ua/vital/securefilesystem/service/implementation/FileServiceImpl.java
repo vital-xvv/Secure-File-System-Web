@@ -21,14 +21,12 @@ import ua.vital.securefilesystem.model.User;
 import ua.vital.securefilesystem.repository.FileRepository;
 import ua.vital.securefilesystem.repository.UserRepository;
 import ua.vital.securefilesystem.service.FileService;
-import ua.vital.securefilesystem.service.UserService;
 import ua.vital.securefilesystem.specification.FileSpecificationUtils;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -41,17 +39,28 @@ public class FileServiceImpl implements FileService {
     private final UserRepository userRepository;
 
     @Override
-    public File createFile(UploadFileDTO file) {
-        return fileRepository.save(
-                File.builder()
-                    .fileName(file.getFileName())
-                    .extension(file.getExtension())
-                    .size(file.getSize())
-                    .owner(User.builder().id(file.getOwnerId()).build())
-                    .languages(file.getLanguages())
-                    .createdAt(LocalDateTime.now())
-                    .modifiedAt(LocalDateTime.now())
-                    .build());
+    public ResponseEntity<?> createFile(UploadFileDTO fileDTO) {
+        boolean userExists = userRepository.existsById(fileDTO.getOwnerId());
+        if(userExists){
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(ReducedFileDTO.fromFile(fileRepository.save(
+                        File.builder()
+                                .fileName(fileDTO.getFileName())
+                                .extension(fileDTO.getExtension())
+                                .size(fileDTO.getSize())
+                                .owner(userRepository.findById(fileDTO.getOwnerId()).get())
+                                .languages(fileDTO.getLanguages())
+                                .createdAt(LocalDateTime.now())
+                                .modifiedAt(LocalDateTime.now())
+                                .build())));
+        } else
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                HttpResponse.builder()
+                        .timestamp(LocalDateTime.now())
+                        .message("User with id %d does not exist".formatted(fileDTO.getOwnerId()))
+                        .httpStatus(HttpStatus.BAD_REQUEST.name())
+                        .statusCode(HttpStatus.BAD_REQUEST.value())
+                        .build());
     }
 
     @Override
