@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3050", maxAge = 3600)
+@CrossOrigin(origins = {"http://localhost:3050", "http://localhost:3000"}, maxAge = 3600)
 @RequestMapping("/file")
 @RestController
 @RequiredArgsConstructor
