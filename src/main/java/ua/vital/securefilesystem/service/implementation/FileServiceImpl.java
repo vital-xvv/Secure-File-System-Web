@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,7 +15,10 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import ua.vital.securefilesystem.config.MQConfig;
 import ua.vital.securefilesystem.dto.file_dto.*;
+import ua.vital.securefilesystem.enumeration.FileEventType;
+import ua.vital.securefilesystem.mb_message.FileMessage;
 import ua.vital.securefilesystem.model.File;
 import ua.vital.securefilesystem.model.HttpResponse;
 import ua.vital.securefilesystem.model.User;
@@ -30,6 +34,8 @@ import java.io.PrintWriter;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 @Slf4j
 @Service
@@ -37,22 +43,24 @@ import java.util.List;
 public class FileServiceImpl implements FileService {
     private final FileRepository fileRepository;
     private final UserRepository userRepository;
+    private final RabbitTemplate rabbitTemplate;
 
     @Override
     public ResponseEntity<?> createFile(UploadFileDTO fileDTO) {
         boolean userExists = userRepository.existsById(fileDTO.getOwnerId());
         if(userExists){
-            return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(ReducedFileDTO.fromFile(fileRepository.save(
-                        File.builder()
-                                .fileName(fileDTO.getFileName())
-                                .extension(fileDTO.getExtension())
-                                .size(fileDTO.getSize())
-                                .owner(userRepository.findById(fileDTO.getOwnerId()).get())
-                                .languages(fileDTO.getLanguages())
-                                .createdAt(LocalDateTime.now())
-                                .modifiedAt(LocalDateTime.now())
-                                .build())));
+            File file = File.builder()
+                    .fileName(fileDTO.getFileName())
+                    .extension(fileDTO.getExtension())
+                    .size(fileDTO.getSize())
+                    .owner(userRepository.findById(fileDTO.getOwnerId()).get())
+                    .languages(fileDTO.getLanguages())
+                    .createdAt(LocalDateTime.now())
+                    .modifiedAt(LocalDateTime.now())
+                    .build();
+            ReducedFileDTO reducedFileDTO = ReducedFileDTO.fromFile(fileRepository.save(file));
+            sendEmailToFileOwnerAfterCreation(reducedFileDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).body(reducedFileDTO);
         } else
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
                 HttpResponse.builder()
@@ -61,6 +69,16 @@ public class FileServiceImpl implements FileService {
                         .httpStatus(HttpStatus.BAD_REQUEST.name())
                         .statusCode(HttpStatus.BAD_REQUEST.value())
                         .build());
+    }
+
+    private void sendEmailToFileOwnerAfterCreation(ReducedFileDTO fileDTO) {
+        CompletableFuture.runAsync(() -> {
+                Optional<User> owner = userRepository.findById(fileDTO.getOwner().getId());
+                owner.ifPresent(user -> rabbitTemplate.convertAndSend(MQConfig.EMAIL_EXCHANGE, MQConfig.ROUTING_KEY,
+                        new FileMessage(fileDTO.getId(), FileEventType.FILE_CREATED, user.getEmail(), "File creation",
+                                "File %s has been created in your account, %s!".formatted(fileDTO.getFileName(), user.getFirstName()))));
+            }
+        );
     }
 
     @Override
