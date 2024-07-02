@@ -4,6 +4,15 @@ spring:
   application:
     name: ${APPLICATION_NAME}
 
+  security:
+    oauth2:
+      resource-server:
+        opaque-token:
+          introspection-uri: https://www.googleapis.com
+          client-id: client-id-secret
+          client-secret: client-secret
+
+
   datasource:
     driver-class-name: ${DB_DRIVER}
     url: ${DB_URL}
@@ -28,3 +37,9 @@ server:
   servlet:
     context-path: /api
   port: 8080
+logging:
+  level:
+    org:
+      springframework:
+        security: TRACE
+
